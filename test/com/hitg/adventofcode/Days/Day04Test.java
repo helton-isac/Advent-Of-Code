@@ -1,10 +1,10 @@
-package tests;
+package com.hitg.adventofcode.Days;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.hitg.adventofcode.Day04;
+import com.hitg.adventofcode.Days.Day04;
 
 class Day04Test {
 

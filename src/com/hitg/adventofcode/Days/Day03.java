@@ -1,4 +1,4 @@
-package com.hitg.adventofcode;
+package com.hitg.adventofcode.Days;
 
 public class Day03 {
 
