@@ -89,7 +89,7 @@ public class Day01 extends AbstractDay {
 
 	@Override
 	public String getChallengeName() {
-		return "Day 1: Inverse Captcha";
+		return "--- Day 1: Inverse Captcha ---";
 	}
 
 	@Override

@@ -56,7 +56,7 @@ public class Day02 extends AbstractDay{
 
 	@Override
 	public String getChallengeName() {
-		return "Day 2: Corruption Checksum";
+		return "--- Day 2: Corruption Checksum ---";
 	}
 
 	@Override
@@ -74,7 +74,6 @@ public class Day02 extends AbstractDay{
 		StringBuilder sb = new StringBuilder();
 		int[][] castInput = (int[][]) this.input;
 		
-		sb.append("\n");
 		for (int i = 0; i < castInput.length; i++) {
 			for (int j = 0; j < castInput[i].length; j++) {
 				sb.append(String.format("%1$" + 6 + "s", castInput[i][j]));

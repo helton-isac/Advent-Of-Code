@@ -1,7 +1,8 @@
 package com.hitg.adventofcode.Days;
 
 /**
- * Abstract class used to
+ * Abstract class used to centralize common tasks for the advent of code
+ * problems.
  * 
  * @author Helton Isac
  *
@@ -64,11 +65,10 @@ public abstract class AbstractDay {
 		System.out.println();
 		System.out.println(this.getChallengeName());
 		System.out.println();
-		System.out.println("input: " + this.inputToString());
+		System.out.println("input:");
+		System.out.println(this.inputToString());
 		System.out.println();
 		System.out.println("Part One Answer: " + this.getPart1Answer());
 		System.out.println("Part Two Answer: " + this.getPart2Answer());
-		System.out.println();
 	}
-
 }
