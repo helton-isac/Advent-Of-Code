@@ -22,7 +22,9 @@ public class Main {
 		case 4:
 			return new Day04(Inputs.DAY_04_INPUT);
 		case 5:
-			return new Day05(Inputs.DAY_05_INPUT);			
+			return new Day05(Inputs.DAY_05_INPUT);
+		case 6:
+			return new Day06(Inputs.DAY_06_INPUT);			
 		default:
 			return null;
 		}

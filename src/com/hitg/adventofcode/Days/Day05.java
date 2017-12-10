@@ -36,18 +36,7 @@ public class Day05 extends AbstractDay {
 
 	@Override
 	public String inputToString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		for (int value : (int[]) this.input) {
-			sb.append(value);
-			sb.append(",");
-		}
-		if (sb.length() > 1) {
-			sb.deleteCharAt(sb.length() - 1);
-		}
-		sb.append("]");
-
-		return sb.toString();
+		return Util.arrayIntToString((int[]) this.input);
 	}
 
 	private int solveMaze_Part1(int[] input) {
