@@ -23,6 +23,8 @@ public class Day07 extends AbstractDay {
 		return "--- Day 7: Recursive Circus ---";
 	}
 
+	Program rootNode = null;
+
 	public String getRootNode(String[] input) {
 
 		Map<String, Program> map = new HashMap<>();
@@ -51,13 +53,63 @@ public class Day07 extends AbstractDay {
 			}
 		}
 
-		Program p = map.get(mainNodeName);
-		while (p != null) {
-			mainNodeName = p.getName();
-			p = p.getParent();
+		this.rootNode = map.get(mainNodeName);
+		while (this.rootNode.getParent() != null) {
+			this.rootNode = this.rootNode.getParent();
 		}
 
-		return mainNodeName;
+		return this.rootNode.getName();
+	}
+
+	public int getDifferenceToBalanceTree() {
+		if (this.rootNode == null) {
+			this.getRootNode((String[]) this.input);
+		}
+
+		return -1;
+	}
+
+	int exactlyWeight = -1;
+
+	private int calcWeightNode(Program node) {
+		if (this.exactlyWeight != -1) {
+			return -1;
+		}
+		int nodeWeight = node.getWeight();
+		if (node.getChildren().size() > 0) {
+			int[] weights = new int[node.getChildren().size()];
+			int i = 0;
+			for (Program p : node.getChildren()) {
+				weights[i] = calcWeightNode(p);
+				nodeWeight += weights[i];
+				i++;
+			}
+			Map<Integer, Integer> minMaxTable = new HashMap<>();
+			for (int w : weights) {
+				if (!minMaxTable.containsKey(w)) {
+					minMaxTable.put(w, 1);
+				} else {
+					minMaxTable.put(w, minMaxTable.get(w) + 1);
+				}
+			}
+			if (minMaxTable.size() > 1 && this.exactlyWeight == -1) {
+				int maxOcurrence = 0;
+				int minOcurrence = 0;
+				for (int key : minMaxTable.keySet()) {
+					if (minMaxTable.get(key) > 1) {
+						maxOcurrence = key;
+					}else {
+						minOcurrence = key;
+					}
+				}
+				for (Program p : node.getChildren()) {
+					if(calcWeightNode(p) == minOcurrence) {
+						this.exactlyWeight = p.getWeight() + maxOcurrence - minOcurrence;						
+					}
+				}
+			}
+		}
+		return nodeWeight;
 	}
 
 	@Override
@@ -67,7 +119,9 @@ public class Day07 extends AbstractDay {
 
 	@Override
 	public String getPart2Answer() {
-		return String.valueOf(2);
+		this.getRootNode((String[]) this.input);
+		this.calcWeightNode(this.rootNode);
+		return String.valueOf(this.exactlyWeight);
 	}
 
 	@Override
@@ -97,6 +151,10 @@ public class Day07 extends AbstractDay {
 
 		public String getName() {
 			return this.name;
+		}
+
+		public LinkedList<Program> getChildren() {
+			return this.childs;
 		}
 
 		public void setWeight(int weight) {
